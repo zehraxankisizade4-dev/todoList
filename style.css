@@ -1,0 +1,119 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.mainBox {
+    border: 1px solid #c4c4c4;
+    border-top: 30px solid #e5a52f;
+    border-radius: 16px;
+    padding: 20px;
+    width: 25vw;
+    margin: 80px auto;
+}
+.sort-top-gray {
+    margin: 13px 0;
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    font-family: Roboto, sans-serif;
+    font-weight:bolder;
+}
+
+.inputBox {
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+}
+
+input {
+    width: 80%;
+    border: none;
+    outline: none;
+}
+
+.buttons {
+    background-color: #833AE0;
+    border-radius: 70px;
+    width: 60%;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.plus {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background-color: #AA68FE;
+    color: white;
+    font-size: 20px;
+}
+
+.add {
+    flex: 1;
+    height: 42px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+   
+  
+}
+
+.list {
+    margin: 15px 0;
+    padding-left: 20px;
+    list-style: none;
+    counter-reset: item;
+}
+.list li {
+    margin: 5px 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    counter-increment: item;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+.list li .box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.list li::before {
+    content: counter(item) ". ";
+    margin-right: 10px;
+}
+
+.tool {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-left: auto; 
+}
+
+
+.plus,
+.add,
+.edit,
+.delete-item,
+.plus-save {
+    cursor: pointer;
+}
