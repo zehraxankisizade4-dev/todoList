@@ -13,7 +13,7 @@
     border-top: 30px solid #e5a52f;
     border-radius: 16px;
     padding: 20px;
-    width: 25vw;
+    width: 30vw;
     margin: 150px auto;
 }
 
@@ -111,7 +111,6 @@ input {
     align-items: center;
     margin-left: auto;
 }
-
 
 .plus,
 .add,

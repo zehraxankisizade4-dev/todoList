@@ -1,4 +1,3 @@
-
 const plus = document.querySelector(".plus");
 const add = document.querySelector(".add");
 const inputBox = document.querySelector(".inputBox");
@@ -7,55 +6,20 @@ const sort = document.querySelector(".sort-top-gray");
 const input = document.querySelector(".input");
 const list = document.querySelector(".list");
 
-//sort
-let isDesc = false;
+let isAsc = true;
 
-function sortList() {
-    let items = Array.from(list.querySelectorAll("li"));
-
-    items.sort((a, b) => {
-        let textA = a.querySelector(".text").textContent.trim();
-        let textB = b.querySelector(".text").textContent.trim();
-
-        let compareResult = textA.localeCompare(textB, undefined, { sensitivity: "base" });
-        return isDesc ? -compareResult : compareResult;
-    });
-
-    list.innerHTML = "";
-    items.forEach(item => list.appendChild(item));
-
-    sort.src = isDesc
-        ? "./images/sort-top-grey.svg"
-        : "./images/sort-bottom-grey.svg";
-}
-
-
-sort.addEventListener("mouseover", () => {
-    sort.src = isDesc
-        ? "./images/sort-top.svg"
-        : "./images/sort-bottom.svg";
-});
-
-sort.addEventListener("mouseout", () => {
-    sort.src = isDesc
-        ? "./images/sort-top-grey.svg"
-        : "./images/sort-bottom-grey.svg";
-});
-
-
-
-
-
-// input 
+//input ac
 plus.addEventListener("click", () => {
     inputBox.style.display = "flex";
 });
 
-
-//input silmek
+//input temizleme
 deleteIcon.addEventListener("click", () => {
     input.value = "";
 });
+
+
+
 
 deleteIcon.addEventListener("mouseover", () => {
     deleteIcon.src = "./images/delete-purple.svg";
@@ -65,7 +29,42 @@ deleteIcon.addEventListener("mouseout", () => {
     deleteIcon.src = "./images/delete.svg";
 });
 
-                
+
+sort.addEventListener("mouseover", () => {
+    sort.src = isAsc
+        ? "./images/sort-bottom.svg" 
+        : "./images/sort-top.svg";     
+});
+
+sort.addEventListener("mouseout", () => {
+    sort.src = isAsc
+        ? "./images/sort-bottom-grey.svg"
+        : "./images/sort-top-grey.svg";
+});
+
+//sort
+sort.addEventListener("click", () => {
+    isAsc = !isAsc;
+
+    let items = Array.from(list.querySelectorAll("li"));
+
+    items.sort((a, b) => {
+        let textA = a.querySelector(".text").textContent.toLowerCase();
+        let textB = b.querySelector(".text").textContent.toLowerCase();
+
+        return isAsc
+            ? textA.localeCompare(textB)
+            : textB.localeCompare(textA);
+    });
+
+    list.innerHTML = "";
+    items.forEach(item => list.appendChild(item));
+
+   
+    sort.src = isAsc
+        ? "./images/sort-bottom-grey.svg"
+        : "./images/sort-top-grey.svg";
+});
 
 
 
@@ -91,8 +90,6 @@ add.addEventListener("click", () => {
 
     input.value = "";
     inputBox.style.display = "none";
-
-    sortList();
 });
 
 
@@ -121,12 +118,8 @@ list.addEventListener("mouseout", (e) => {
 
 list.addEventListener("click", (e) => {
 
-    if (e.target.classList.contains("delete-item")) {
-        e.target.closest("li").remove();
-    }
-
+    //edit
     if (e.target.classList.contains("edit")) {
-
         let li = e.target.closest("li");
         let textEl = li.querySelector(".text");
         let deleteBtn = li.querySelector(".delete-item");
@@ -143,17 +136,17 @@ list.addEventListener("click", (e) => {
         textEl.style.display = "none";
         li.prepend(editInput);
 
-        let saveBtn = document.createElement("img");
-        saveBtn.src = "./images/plus.svg";
-        saveBtn.classList.add("plus-save");
+        let plusBtn = document.createElement("img");
+        plusBtn.src = "./images/plus.svg";
+        plusBtn.classList.add("plus-save");
 
-        tool.prepend(saveBtn);
+        tool.prepend(plusBtn);
 
         editInput.focus();
     }
 
+    //save
     if (e.target.classList.contains("plus-save")) {
-
         let li = e.target.closest("li");
         let editInput = li.querySelector(".edit-input");
         let textEl = li.querySelector(".text");
@@ -170,7 +163,11 @@ list.addEventListener("click", (e) => {
 
         editInput.remove();
         e.target.remove();
+    }
 
-        sortList();
+    //delete
+    if (e.target.classList.contains("delete-item")) {
+        let li = e.target.closest("li");
+        li.remove();
     }
 });
