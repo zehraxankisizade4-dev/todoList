@@ -1,6 +1,4 @@
-// =====================
-// ELEMENTLƏR
-// =====================
+
 const plus = document.querySelector(".plus");
 const add = document.querySelector(".add");
 const inputBox = document.querySelector(".inputBox");
@@ -9,14 +7,9 @@ const sort = document.querySelector(".sort-top-gray");
 const input = document.querySelector(".input");
 const list = document.querySelector(".list");
 
-// false = A-Z
-// true = Z-A
+//sort
 let isDesc = false;
 
-
-// =====================
-// SORT FUNCTION
-// =====================
 function sortList() {
     let items = Array.from(list.querySelectorAll("li"));
 
@@ -24,12 +17,7 @@ function sortList() {
         let textA = a.querySelector(".text").textContent.trim();
         let textB = b.querySelector(".text").textContent.trim();
 
-        let compareResult = textA.localeCompare(
-            textB,
-            undefined,
-            { sensitivity: "base" }
-        );
-
+        let compareResult = textA.localeCompare(textB, undefined, { sensitivity: "base" });
         return isDesc ? -compareResult : compareResult;
     });
 
@@ -42,33 +30,6 @@ function sortList() {
 }
 
 
-// =====================
-// INPUT BOX AÇ
-// =====================
-plus.addEventListener("click", () => {
-    inputBox.style.display = "flex";
-});
-
-
-// =====================
-// INPUT TƏMİZLƏ
-// =====================
-deleteIcon.addEventListener("click", () => {
-    input.value = "";
-});
-
-deleteIcon.addEventListener("mouseover", () => {
-    deleteIcon.src = "./images/delete-purple.svg";
-});
-
-deleteIcon.addEventListener("mouseout", () => {
-    deleteIcon.src = "./images/delete.svg";
-});
-
-
-// =====================
-// SORT HOVER
-// =====================
 sort.addEventListener("mouseover", () => {
     sort.src = isDesc
         ? "./images/sort-top.svg"
@@ -82,18 +43,33 @@ sort.addEventListener("mouseout", () => {
 });
 
 
-// =====================
-// SORT CLICK
-// =====================
-sort.addEventListener("click", () => {
-    isDesc = !isDesc;
-    sortList();
+
+
+
+// input 
+plus.addEventListener("click", () => {
+    inputBox.style.display = "flex";
 });
 
 
-// =====================
-// ADD ITEM
-// =====================
+//input silmek
+deleteIcon.addEventListener("click", () => {
+    input.value = "";
+});
+
+deleteIcon.addEventListener("mouseover", () => {
+    deleteIcon.src = "./images/delete-purple.svg";
+});
+
+deleteIcon.addEventListener("mouseout", () => {
+    deleteIcon.src = "./images/delete.svg";
+});
+
+                
+
+
+
+//add
 add.addEventListener("click", () => {
     let value = input.value.trim();
 
@@ -120,9 +96,7 @@ add.addEventListener("click", () => {
 });
 
 
-// =====================
-// ICON HOVER
-// =====================
+
 list.addEventListener("mouseover", (e) => {
     if (e.target.classList.contains("edit")) {
         e.target.src = "./images/edit2-purple.svg";
@@ -144,9 +118,7 @@ list.addEventListener("mouseout", (e) => {
 });
 
 
-// =====================
-// DELETE + EDIT + SAVE
-// =====================
+
 list.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("delete-item")) {
